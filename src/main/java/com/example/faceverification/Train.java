@@ -2,8 +2,17 @@ package com.example.faceverification;
 
 import org.deeplearning4j.api.storage.StatsStorage;
 import org.deeplearning4j.datasets.iterator.impl.LFWDataSetIterator;
+import org.deeplearning4j.nn.conf.GradientNormalization;
+import org.deeplearning4j.nn.conf.graph.L2NormalizeVertex;
+import org.deeplearning4j.nn.conf.layers.CenterLossOutputLayer;
+import org.deeplearning4j.nn.conf.layers.DenseLayer;
+import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.graph.ComputationGraph;
+import org.deeplearning4j.nn.transferlearning.FineTuneConfiguration;
 import org.deeplearning4j.nn.transferlearning.TransferLearning;
+import org.deeplearning4j.nn.weights.WeightInit;
+import org.deeplearning4j.optimize.api.InvocationType;
+import org.deeplearning4j.optimize.listeners.EvaluativeListener;
 import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 import org.deeplearning4j.ui.api.UIServer;
 import org.deeplearning4j.ui.stats.StatsListener;
@@ -16,19 +25,25 @@ import java.nio.file.Paths;
 import java.util.Random;
 
 import org.datavec.image.loader.LFWLoader;
+import org.deeplearning4j.zoo.ZooModel;
+import org.deeplearning4j.zoo.model.SqueezeNet;
+import org.deeplearning4j.zoo.model.VGG16;
+import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.api.buffer.DataType;
 import org.nd4j.linalg.dataset.api.preprocessor.DataNormalization;
 import org.nd4j.linalg.dataset.api.preprocessor.ImagePreProcessingScaler;
 import org.nd4j.linalg.factory.Nd4j;
+import org.nd4j.linalg.learning.config.Adam;
+import org.nd4j.linalg.lossfunctions.LossFunctions;
 import org.slf4j.Logger;
 
 public class Train {
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(Train.class);
 
     private static File modelLocation = new File(Paths.get(System.getProperty("user.home"), ".deeplearning4j", "models", "facenet.zip").toString());
-    private static int batchSize = 64; // depending on your hardware, you will want to increase or decrease
+    private static int batchSize = 8; // depending on your hardware, you will want to increase or decrease
     private static int numExamples = LFWLoader.NUM_IMAGES;
-    private static int outputNum = 600; // number of "identities" in the dataset
+    private static int outputNum = 187; // number of "identities" in the dataset
     private static double splitTrainTest = 1.0;
     private static int randomSeed = 123;
 
@@ -49,24 +64,27 @@ public class Train {
         DataNormalization scaler = new ImagePreProcessingScaler(0, 1);
         trainIter.setPreProcessor(scaler);
 
-        ComputationGraph net = new ComputationGraph(Model.networkConfig());
+        ComputationGraph net = Model.getNetwork();
+
+        log.info(net.summary());
 
         UIServer server = UIServer.getInstance();
         StatsStorage storage = new InMemoryStatsStorage();
         server.attach(storage);
         net.setListeners(
-                new ScoreIterationListener(10),
-                new StatsListener(storage)
+                new ScoreIterationListener(2),
+                new StatsListener(storage),
+                new EvaluativeListener(trainIter, 1, InvocationType.EPOCH_END)
         );
 
-        System.out.println(net.summary());
+//        System.out.println(net.summary());
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 100; i++) {
             net.fit(trainIter);
 
             log.info("Epoch: {}", (i+1));
-            log.info("Accuracy: " + net.evaluate(trainIter).accuracy());
-            log.info("Precision: " + net.evaluate(trainIter).precision());
+//            log.info("Accuracy: " + squeezeNet.evaluate(trainIter).stats());
+//            log.info("Precision: " + squeezeNet.evaluate(trainIter).precision());
         }
 
         ComputationGraph snippedNet = snipNetwork(net);

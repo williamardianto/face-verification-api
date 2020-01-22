@@ -36,6 +36,7 @@ public class FaceEmbedding {
         INDArray faceEmbedding4 = getEmbedding(net, normalize(face4));
 
 
+        System.out.println(distance(faceEmbedding1, faceEmbedding1));
         System.out.println(distance(faceEmbedding1, faceEmbedding2));
         System.out.println(distance(faceEmbedding1, faceEmbedding3));
         System.out.println(distance(faceEmbedding1, faceEmbedding4));
