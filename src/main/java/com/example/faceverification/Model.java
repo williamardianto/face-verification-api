@@ -1,3 +1,5 @@
+package com.example.faceverification;
+
 import org.datavec.image.loader.LFWLoader;
 import org.deeplearning4j.nn.api.OptimizationAlgorithm;
 import org.deeplearning4j.nn.conf.ComputationGraphConfiguration;
@@ -23,7 +25,7 @@ public class Model {
     static int embeddingSize = 128;
     private static int randomSeed = 123;
     static int[] inputShape = new int[]{3, 96, 96};
-    private static int outputNum = LFWLoader.NUM_LABELS;
+    private static int outputNum = 600;
 
     public static ComputationGraphConfiguration networkConfig() {
 
@@ -33,7 +35,7 @@ public class Model {
 //                .activation(Activation.IDENTITY)
                 .optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT)
 //                .updater(new Adam(0.01))
-                .updater(new Nesterovs(0.001, 0.9))
+                .updater(new Nesterovs(0.01, 0.9))
                 .weightInit(WeightInit.XAVIER)
                 .l2(5e-5)
                 .convolutionMode(ConvolutionMode.Same)

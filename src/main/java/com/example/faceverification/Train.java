@@ -1,21 +1,14 @@
+package com.example.faceverification;
+
 import org.deeplearning4j.api.storage.StatsStorage;
 import org.deeplearning4j.datasets.iterator.impl.LFWDataSetIterator;
-import org.deeplearning4j.nn.api.OptimizationAlgorithm;
-import org.deeplearning4j.nn.conf.*;
-import org.deeplearning4j.nn.conf.graph.L2NormalizeVertex;
-import org.deeplearning4j.nn.conf.graph.MergeVertex;
-import org.deeplearning4j.nn.conf.inputs.InputType;
-import org.deeplearning4j.nn.conf.layers.*;
 import org.deeplearning4j.nn.graph.ComputationGraph;
 import org.deeplearning4j.nn.transferlearning.TransferLearning;
-import org.deeplearning4j.nn.weights.WeightInit;
 import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 import org.deeplearning4j.ui.api.UIServer;
 import org.deeplearning4j.ui.stats.StatsListener;
 import org.deeplearning4j.ui.storage.InMemoryStatsStorage;
 import org.deeplearning4j.util.ModelSerializer;
-import org.nd4j.linalg.activations.Activation;
-import org.deeplearning4j.zoo.model.helper.FaceNetHelper;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,21 +17,18 @@ import java.util.Random;
 
 import org.datavec.image.loader.LFWLoader;
 import org.nd4j.linalg.api.buffer.DataType;
-import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.dataset.api.preprocessor.DataNormalization;
 import org.nd4j.linalg.dataset.api.preprocessor.ImagePreProcessingScaler;
 import org.nd4j.linalg.factory.Nd4j;
-import org.nd4j.linalg.learning.config.Adam;
-import org.nd4j.linalg.lossfunctions.LossFunctions;
 import org.slf4j.Logger;
 
-public class Main {
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(Main.class);
+public class Train {
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(Train.class);
 
     private static File modelLocation = new File(Paths.get(System.getProperty("user.home"), ".deeplearning4j", "models", "facenet.zip").toString());
     private static int batchSize = 64; // depending on your hardware, you will want to increase or decrease
     private static int numExamples = LFWLoader.NUM_IMAGES;
-    private static int outputNum = LFWLoader.NUM_LABELS; // number of "identities" in the dataset
+    private static int outputNum = 600; // number of "identities" in the dataset
     private static double splitTrainTest = 1.0;
     private static int randomSeed = 123;
 
