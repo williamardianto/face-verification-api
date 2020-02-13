@@ -26,6 +26,7 @@ import java.util.Random;
 
 import org.datavec.image.loader.LFWLoader;
 import org.deeplearning4j.zoo.ZooModel;
+import org.deeplearning4j.zoo.model.ResNet50;
 import org.deeplearning4j.zoo.model.SqueezeNet;
 import org.deeplearning4j.zoo.model.VGG16;
 import org.nd4j.linalg.activations.Activation;
@@ -40,14 +41,16 @@ import org.slf4j.Logger;
 public class Train {
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(Train.class);
 
-    private static File modelLocation = new File(Paths.get(System.getProperty("user.home"), ".deeplearning4j", "models", "facenet.zip").toString());
-    private static int batchSize = 8; // depending on your hardware, you will want to increase or decrease
-    private static int numExamples = LFWLoader.NUM_IMAGES;
-    private static int outputNum = 187; // number of "identities" in the dataset
+    private static File modelLocation = new File(Paths.get(System.getProperty("user.home"), ".deeplearning4j", "models", "facenet3.zip").toString());
+    private static int batchSize = 4; // depending on your hardware, you will want to increase or decrease
+
+    private static int outputNum = 55; // number of "identities" in the dataset
+    private static int numExamples = outputNum*6;
+
     private static double splitTrainTest = 1.0;
     private static int randomSeed = 123;
 
-    private static int[] inputShape = new int[]{3, 96, 96};
+    private static int[] inputShape = new int[]{3, 224, 224};
 
     private static int[] inputWHC = new int[]{inputShape[2], inputShape[1], inputShape[0]};
 
@@ -61,10 +64,13 @@ public class Train {
         Nd4j.setDefaultDataTypes(DataType.DOUBLE, DataType.DOUBLE);
 
         LFWDataSetIterator trainIter = new LFWDataSetIterator(batchSize, numExamples, inputWHC, outputNum, false, true, splitTrainTest, new Random(randomSeed));
+//        LFWDataSetIterator testIter = new LFWDataSetIterator(batchSize, numExamples, inputWHC, 6, false, false, 1-splitTrainTest, new Random(randomSeed));
+
         DataNormalization scaler = new ImagePreProcessingScaler(0, 1);
         trainIter.setPreProcessor(scaler);
 
-        ComputationGraph net = Model.getNetwork();
+        ComputationGraph net = Model.getResnetPretrained();
+
 
         log.info(net.summary());
 
@@ -72,14 +78,15 @@ public class Train {
         StatsStorage storage = new InMemoryStatsStorage();
         server.attach(storage);
         net.setListeners(
-                new ScoreIterationListener(2),
+                new ScoreIterationListener(5),
                 new StatsListener(storage),
                 new EvaluativeListener(trainIter, 1, InvocationType.EPOCH_END)
+//                new EvaluativeListener(testIter, 1, InvocationType.EPOCH_END)
         );
 
 //        System.out.println(net.summary());
-
-        for (int i = 0; i < 100; i++) {
+// 650
+        for (int i = 0; i < 500; i++) {
             net.fit(trainIter);
 
             log.info("Epoch: {}", (i+1));

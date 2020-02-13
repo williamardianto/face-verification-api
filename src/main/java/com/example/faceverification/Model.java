@@ -15,6 +15,7 @@ import org.deeplearning4j.nn.transferlearning.FineTuneConfiguration;
 import org.deeplearning4j.nn.transferlearning.TransferLearning;
 import org.deeplearning4j.nn.weights.WeightInit;
 import org.deeplearning4j.zoo.ZooModel;
+import org.deeplearning4j.zoo.model.ResNet50;
 import org.deeplearning4j.zoo.model.SqueezeNet;
 import org.deeplearning4j.zoo.model.helper.FaceNetHelper;
 import org.nd4j.linalg.activations.Activation;
@@ -28,24 +29,51 @@ import java.io.IOException;
 public class Model {
 
     static int embeddingSize = 128;
-    static int[] inputShape = new int[]{3, 96, 96};
-    private static int outputNum = 187;
+    private static int outputNum = 55;
+
+    static FineTuneConfiguration fineTuneConf = new FineTuneConfiguration.Builder()
+            .activation(Activation.LEAKYRELU)
+            .weightInit(WeightInit.XAVIER)
+            .updater(new Adam(1e-4))
+//                .updater(new Nesterovs(10,0.9))
+            .build();
 
     public static ComputationGraph getNetwork() throws IOException {
 
         ZooModel zooModel = SqueezeNet.builder().build();
         ComputationGraph squeezeNet = (ComputationGraph) zooModel.initPretrained();
-
-        FineTuneConfiguration fineTuneConf = new FineTuneConfiguration.Builder()
-                .activation(Activation.LEAKYRELU)
-                .weightInit(WeightInit.XAVIER)
-                .updater(new Adam(1e-2))
-                .build();
+//        ComputationGraph squeezeNet = zooModel.init();
 
         ComputationGraph squeezeNetFineTune = new TransferLearning.GraphBuilder(squeezeNet)
                 .fineTuneConfiguration(fineTuneConf)
                 .removeVertexAndConnections("loss")
-                .addLayer("bottleneck",new DenseLayer.Builder().activation(Activation.RELU).nIn(1000).nOut(128).build(),"global_average_pooling2d_5")
+                .addLayer("bottleneck",new DenseLayer.Builder().activation(Activation.IDENTITY).nIn(1000).nOut(128).build(),"global_average_pooling2d_5")
+                .addVertex("embeddings", new L2NormalizeVertex(new int[]{}, 1e-6), "bottleneck")
+                .addLayer("lossLayer", new CenterLossOutputLayer.Builder()
+                        .lossFunction(LossFunctions.LossFunction.SQUARED_LOSS)
+                        .activation(Activation.SOFTMAX)
+                        .nIn(128)
+                        .nOut(outputNum)
+                        .lambda(1e-2)
+                        .alpha(0.5)
+                        .gradientNormalization(GradientNormalization.RenormalizeL2PerLayer)
+                        .build(), "embeddings")
+                .setOutputs("lossLayer")
+                .build();
+
+        return squeezeNetFineTune;
+    }
+
+    public static ComputationGraph getResnetPretrained() throws IOException {
+
+        ZooModel zooModel = ResNet50.builder().build();
+        ComputationGraph squeezeNet = (ComputationGraph) zooModel.initPretrained();
+//        ComputationGraph squeezeNet = zooModel.init();
+
+        ComputationGraph squeezeNetFineTune = new TransferLearning.GraphBuilder(squeezeNet)
+                .fineTuneConfiguration(fineTuneConf)
+                .removeVertexAndConnections("fc1000")
+                .addLayer("bottleneck",new DenseLayer.Builder().activation(Activation.IDENTITY).nIn(2048).nOut(128).build(),"flatten_1")
                 .addVertex("embeddings", new L2NormalizeVertex(new int[]{}, 1e-6), "bottleneck")
                 .addLayer("lossLayer", new CenterLossOutputLayer.Builder()
                         .lossFunction(LossFunctions.LossFunction.SQUARED_LOSS)
