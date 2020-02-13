@@ -1,11 +1,13 @@
 package com.example.faceverification;
 
+import org.apache.commons.net.util.Base64;
 import org.datavec.image.loader.NativeImageLoader;
 import org.deeplearning4j.nn.graph.ComputationGraph;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.indexing.INDArrayIndex;
 import org.nd4j.linalg.indexing.NDArrayIndex;
 import org.springframework.web.multipart.MultipartFile;
+import sun.misc.BASE64Decoder;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,8 +15,15 @@ import java.io.IOException;
 import java.util.Map;
 
 public class Utils {
+    public static boolean isNullOrEmpty(String str) {
+        if(str != null && !str.isEmpty())
+            return false;
+        return true;
+    }
+
     public static File convert(MultipartFile file) throws IOException {
-        File convFile = new File(file.getOriginalFilename());
+//        File convFile = new File(file.getOriginalFilename());
+        File convFile = File.createTempFile("temp", ".tmp");
         convFile.createNewFile();
         FileOutputStream fos = new FileOutputStream(convFile);
         fos.write(file.getBytes());
@@ -22,17 +31,29 @@ public class Utils {
         return convFile;
     }
 
-    public static INDArray loadImage(File path) throws IOException {
+    public static File base64ToFile(String imageString) throws IOException {
+        byte[] data = Base64.decodeBase64(imageString);
+
+        File convFile = File.createTempFile("temp", ".tmp");
+        convFile.createNewFile();
+        FileOutputStream fos = new FileOutputStream(convFile);
+        fos.write(data);
+        fos.close();
+        return convFile;
+    }
+
+    public static INDArray loadImage(File file) throws IOException {
 
         NativeImageLoader loader = new NativeImageLoader(224, 224, 3);
-        INDArray image = loader.asMatrix(path);
+        INDArray image = loader.asMatrix(file);
+        file.delete();
         return image;
     }
 
     public static INDArray getEmbedding(ComputationGraph net, INDArray input) {
         input = preProcessInput(input);
         Map<String, INDArray> feedForward = net.feedForward(input, false);
-        return feedForward.get("global_average_pooling2d_1");
+        return feedForward.get("global_average_pooling2d_2");
     }
 
 //    public static INDArray normalize(INDArray read) {
@@ -40,7 +61,7 @@ public class Utils {
 //    }
 
     public static double distance(INDArray a, INDArray b) {
-        return (a.distance2(b) - 50) / 100.0;
+        return (a.distance2(b)) / 100.0;
     }
 
     private static INDArray preProcessInput(INDArray input){

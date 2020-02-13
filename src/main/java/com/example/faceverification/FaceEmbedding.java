@@ -62,7 +62,7 @@ public class FaceEmbedding {
 
     public static INDArray getEmbedding(ComputationGraph net, INDArray feature){
         Map<String, INDArray> feedForward = net.feedForward(feature, false);
-        return feedForward.get("global_average_pooling2d_1");
+        return feedForward.get("global_average_pooling2d_2");
     }
 
 
