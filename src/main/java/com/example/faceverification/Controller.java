@@ -6,6 +6,7 @@ import org.deeplearning4j.nn.modelimport.keras.exceptions.InvalidKerasConfigurat
 import org.deeplearning4j.nn.modelimport.keras.exceptions.UnsupportedKerasConfigurationException;
 import org.deeplearning4j.util.ModelSerializer;
 import org.nd4j.linalg.api.ndarray.INDArray;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,14 +22,8 @@ import java.util.Map;
 
 @RestController
 public class Controller {
-    private static String UPLOADED_FOLDER = new File(Paths.get(System.getProperty("user.home"), "data", "face").toString()).toString();
-    private static String modelLocation = Paths.get(System.getProperty("user.home"), ".deeplearning4j", "models", "faceverification", "vggface-resnet.h5").toString();
-    ComputationGraph net = KerasModelImport.importKerasModelAndWeights(modelLocation);
-
-    public Controller() throws InvalidKerasConfigurationException, IOException, UnsupportedKerasConfigurationException {
-    }
-
-
+    @Autowired
+    FaceService faceService;
 
     @PostMapping(value = "/verify")
     public ResponseEntity verify(
@@ -38,9 +33,6 @@ public class Controller {
             @RequestParam(required = false) String image2_base64
     ) throws IOException {
 
-//        byte[] bytes = file1.getBytes();
-//        Path path = Paths.get(UPLOADED_FOLDER, file1.getOriginalFilename());
-//        Files.write(path, bytes);
         File f1, f2;
 
         if (image1_file != null && image2_file != null){
@@ -55,13 +47,7 @@ public class Controller {
             return ResponseEntity.badRequest().body(body);
         }
 
-        INDArray array1 = Utils.loadImage(f1);
-        INDArray array2 = Utils.loadImage(f2);
-
-        double distance = Utils.distance(
-                Utils.getEmbedding(net, array1),
-                Utils.getEmbedding(net, array2)
-        );
+        double distance = faceService.getDistance(f1, f2);
 
         Map<String , Double > response = new HashMap<>();
         response.put("distance", distance);

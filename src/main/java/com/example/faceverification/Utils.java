@@ -7,60 +7,48 @@ import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.indexing.INDArrayIndex;
 import org.nd4j.linalg.indexing.NDArrayIndex;
 import org.springframework.web.multipart.MultipartFile;
-import sun.misc.BASE64Decoder;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Map;
 
-public class Utils {
-    public static boolean isNullOrEmpty(String str) {
-        if(str != null && !str.isEmpty())
-            return false;
-        return true;
+class Utils {
+    static boolean isNullOrEmpty(String str) {
+        return str == null || str.isEmpty();
     }
 
-    public static File convert(MultipartFile file) throws IOException {
-//        File convFile = new File(file.getOriginalFilename());
+    static File convert(MultipartFile file) throws IOException {
         File convFile = File.createTempFile("temp", ".tmp");
-        convFile.createNewFile();
         FileOutputStream fos = new FileOutputStream(convFile);
         fos.write(file.getBytes());
         fos.close();
         return convFile;
     }
 
-    public static File base64ToFile(String imageString) throws IOException {
+    static File base64ToFile(String imageString) throws IOException {
         byte[] data = Base64.decodeBase64(imageString);
 
         File convFile = File.createTempFile("temp", ".tmp");
-        convFile.createNewFile();
         FileOutputStream fos = new FileOutputStream(convFile);
         fos.write(data);
         fos.close();
         return convFile;
     }
 
-    public static INDArray loadImage(File file) throws IOException {
+    static INDArray loadImage(File file) throws IOException {
 
         NativeImageLoader loader = new NativeImageLoader(224, 224, 3);
-        INDArray image = loader.asMatrix(file);
-        file.delete();
-        return image;
+        return loader.asMatrix(file);
     }
 
-    public static INDArray getEmbedding(ComputationGraph net, INDArray input) {
-        input = preProcessInput(input);
-        Map<String, INDArray> feedForward = net.feedForward(input, false);
+    static INDArray getEmbedding(ComputationGraph net, INDArray input) {
+        Map<String, INDArray> feedForward = net.feedForward(preProcessInput(input), false);
         return feedForward.get("global_average_pooling2d_2");
     }
 
-//    public static INDArray normalize(INDArray read) {
-//        return read.div(255.0);
-//    }
 
-    public static double distance(INDArray a, INDArray b) {
+    static double distance(INDArray a, INDArray b) {
         return (a.distance2(b)) / 100.0;
     }
 
