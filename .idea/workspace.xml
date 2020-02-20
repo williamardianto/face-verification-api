@@ -1,7 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f9b5ab5d-db07-4b19-9ac0-b10500e6ea49" name="Default Changelist" comment="" />
+    <list default="true" id="f9b5ab5d-db07-4b19-9ac0-b10500e6ea49" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/a1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/a2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/a3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/ac1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/ac2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/j1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/j2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/j3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/j4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/k1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/k2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/k3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/k4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/k5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/k6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/m1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/m2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/m3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/m4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/mega1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/mega2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/w1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/w2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/w3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/w4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/y1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/y2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/z1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/z2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/face/z3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/model/vggface-resnet.h5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/model/vggface.h5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/face/Megawati_Sukarnoputri_0023.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/face/Megawati_Sukarnoputri_0028.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/face/Yao_Ming_0002.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/face/Yao_Ming_0008.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/FaceEmbedding.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/LFWDatasetIterator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/face/Megawati_Sukarnoputri_0023.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/face/Megawati_Sukarnoputri_0028.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/face/Yao_Ming_0002.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/face/Yao_Ming_0008.jpg" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,12 +62,30 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1Wdd96grcHNcomeNMxPKQV3zSGA" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/face" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.faceverification" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\willi\Projects\faceverification\src\main\resources\face" />
+      <recent name="C:\Users\willi\Projects\faceverification\src\main\resources\model" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -34,25 +99,75 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.FaceEmbedding">
+  <component name="RunManager" selected="Application.FaceVerificationApplication (1)">
     <configuration name="FaceEmbedding" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="FaceEmbedding" />
+      <option name="MAIN_CLASS_NAME" value="com.example.faceverification.FaceEmbedding" />
       <module name="faceverification" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+    <configuration name="FaceVerificationApplication (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.faceverification.FaceVerificationApplication" />
       <module name="faceverification" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.faceverification.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="LoadONNX" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.faceverification.LoadONNX" />
+      <module name="faceverification" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.faceverification.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Train" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.faceverification.Train" />
+      <module name="faceverification" />
+      <option name="VM_PARAMETERS" value="-Xms8G -Xmx8G -Dorg.bytedeco.javacpp.maxbytes=8G -Dorg.bytedeco.javacpp.maxphysicalbytes=10G" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Train2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.faceverification.Train2" />
+      <module name="faceverification" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.faceverification.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.FaceEmbedding" />
+      <item itemvalue="Application.FaceVerificationApplication (1)" />
+      <item itemvalue="Application.Train" />
+      <item itemvalue="Application.Train2" />
+      <item itemvalue="Application.LoadONNX" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.FaceVerificationApplication (1)" />
         <item itemvalue="Application.FaceEmbedding" />
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.LoadONNX" />
+        <item itemvalue="Application.Train" />
+        <item itemvalue="Application.Train2" />
       </list>
     </recent_temporary>
   </component>
@@ -67,20 +182,54 @@
       <option name="presentableId" value="Default" />
       <updated>1579483250113</updated>
     </task>
+    <task id="LOCAL-00001" summary="add keras model">
+      <created>1581583603751</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1581583603751</updated>
+    </task>
+    <task id="LOCAL-00002" summary="use resnet model">
+      <created>1581591756772</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1581591756772</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="add keras model" />
+    <MESSAGE value="use resnet model" />
+    <option name="LAST_COMMIT_MESSAGE" value="use resnet model" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/LFWDatasetIterator.java</url>
-          <line>121</line>
-          <option name="timeStamp" value="6" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/faceverification/Train.java</url>
+          <line>68</line>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/FaceEmbedding.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="27" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/faceverification/FaceEmbedding.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
