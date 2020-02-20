@@ -1,4 +1,4 @@
-# Face Verification API with SpringBoot, DL4J, and Keras Weights
+# Face Verification API with SpringBoot and DL4J
 
 This repo contain a simple implementation of face verification API service using Springboot and DL4J. Model used in this project is Keras VGGFace taken from this repo (https://github.com/rcmalli/keras-vggface)
 
