@@ -11,12 +11,14 @@ import org.nd4j.linalg.indexing.NDArrayIndex;
 import org.nd4j.linalg.io.ClassPathResource;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Map;
 
 import static com.example.faceverification.Utils.distance;
 import static com.example.faceverification.Utils.loadImage;
 
 public class FaceEmbedding {
+    private static String modelLocation = Paths.get(System.getProperty("user.home"), ".deeplearning4j", "models", "faceverification", "vggface-resnet.h5").toString();
 
     public static void main(String args[]) throws IOException, UnsupportedKerasConfigurationException, InvalidKerasConfigurationException {
         INDArray face1 = loadImage(new ClassPathResource("/face/m1.jpg").getFile());
@@ -24,7 +26,6 @@ public class FaceEmbedding {
         INDArray face3 = loadImage(new ClassPathResource("/face/m3.jpg").getFile());
         INDArray face4 = loadImage(new ClassPathResource("/face/y1.jpg").getFile());
 
-        String modelLocation = new ClassPathResource("/model/vggface-resnet.h5").getFile().getAbsolutePath();
         ComputationGraph net = KerasModelImport.importKerasModelAndWeights(modelLocation);
         System.out.println(net.summary());
 
