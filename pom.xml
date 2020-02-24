@@ -36,24 +36,40 @@
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>org.deeplearning4j</groupId>
-            <artifactId>deeplearning4j-zoo</artifactId>
+            <artifactId>deeplearning4j-core</artifactId>
             <version>${dl4j.version}</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.deeplearning4j</groupId>-->
-<!--            <artifactId>deeplearning4j-core</artifactId>-->
-<!--            <version>${dl4j.version}</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.deeplearning4j</groupId>
+            <artifactId>deeplearning4j-nn</artifactId>
+            <version>${dl4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.deeplearning4j</groupId>
+            <artifactId>deeplearning4j-modelimport</artifactId>
+            <version>${dl4j.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.nd4j</groupId>
             <artifactId>nd4j-native-platform</artifactId>
             <version>${nd4j.version}</version>
         </dependency>
 
-<!--        <dependency>-->
+        <!-- https://mvnrepository.com/artifact/org.datavec/datavec-data-image -->
+        <dependency>
+            <groupId>org.datavec</groupId>
+            <artifactId>datavec-data-image</artifactId>
+            <version>1.0.0-beta6</version>
+        </dependency>
+
+
+        <!--        <dependency>-->
 <!--            <groupId>org.nd4j</groupId>-->
 <!--            <artifactId>nd4j-cuda-10.0-platform</artifactId>-->
 <!--            <version>${nd4j.version}</version>-->
@@ -77,14 +93,6 @@
 <!--            <artifactId>nd4j-cuda-10.0</artifactId>-->
 <!--            <version>${dl4j.version}</version>-->
 <!--        </dependency>-->
-
-        <dependency>
-            <groupId>org.deeplearning4j</groupId>
-            <artifactId>deeplearning4j-ui</artifactId>
-            <version>${dl4j.version}</version>
-        </dependency>
-
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
