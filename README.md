@@ -30,7 +30,7 @@ image1_file: File (image file)
 image2_file: File (image file)
 ```
 
-# Response
+## Response
 
 ```json
 {
